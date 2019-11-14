@@ -1,0 +1,122 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
+#define ROWS 5
+#define COLS 5
+//Christopher Cui ID:260867703
+
+void fillMatrix(int matrix[ROWS][COLS]){
+srand(clock());
+//SEED the srand with a random elemnt (time),
+//then make the random number within the range 1 to 100
+
+for(int i =0;i<ROWS;i++){
+	puts("\n");
+	for (int j = 0; j<COLS; j++)
+	{
+//make the random number within the range 1-100
+//make the array element this random number
+		matrix[i][j]=rand() % 100+1;
+                
+           }
+
+}
+
+}
+
+
+void printMatrix(int matrix[ROWS][COLS]){
+	//iterate though every item of the array, using 2 nested loops
+for(int i =0;i<ROWS;i++){
+	printf("\t {");
+	for (int j=0; j<COLS;j++){
+			if (j== COLS-1) {
+				printf("%d", matrix[i][j]);
+			}else {
+				printf("%d,", matrix[i][j]);
+			}
+		}
+	if (i== ROWS-1){
+		printf("} \n } \n");
+	}else{
+		printf("}, \n");
+	}
+}
+	
+				       
+}
+void transposeMatrix(int matrix[ROWS][COLS]){
+
+//outer loop for the rows
+for (int i=0;i<ROWS;i++){
+//inner loop for the columns of the rows
+		for(int j=0;j<COLS;j++){
+			//make sure that the item hasnt been swapped before, effectively goign into the submatrix
+			if (i<j){
+				//swap the index matrix[i][j] with matrix[j][i] using the addresses of these elemetns
+				//create a tmp variable to be swapped with
+			int tmp = *(*(matrix + i) + j);
+			*(*(matrix + i) + j)=*(*(matrix + j) + i);
+			*(*(matrix + j) + i)=tmp;
+			}
+		}
+	}
+
+
+}
+
+//matrix2[2][5] = {0,1,2,3,4,5,6,7,8,9};
+
+void multiplyMatrix(int m1[2][COLS], int m2[ROWS][COLS], int resultMatrix[ROWS][COLS]){
+
+
+
+	//outer for loop for the rows of the resultmatrix
+	
+for (int k=0;k<2;k++){
+//inner for loop to iterate through the columns of m2
+	for (int i=0;i<5;i++){
+		//create a sum for each value of resultMAtrix and set it to 0 after each iteration of the 2 inner loops
+		int sum=0;
+		//inner loop to add up all the sums 
+		for (int j =0;j<5;j++){
+			sum+= m1[k][j] * m2[j][i];
+			
+		}
+		//make the corresponding index of the result matrix equal to the dot product sum
+		resultMatrix[k][i] = sum;
+	}
+
+}
+
+//make the remaining values of the resultmatrix become 0
+//by using 2 nested for loops starting at row 3
+for (int y=2;y<5;y++){
+	for (int z=0; z<5;z++){
+		resultMatrix[y][z]=0;
+	}
+
+}
+
+}
+
+
+
+int main(){
+int matrix[ROWS][COLS];	
+fillMatrix(matrix);
+printMatrix(matrix);
+transposeMatrix(matrix);
+puts("\n\n");
+printMatrix(matrix);
+int resultMatrix[ROWS][COLS];
+int matrix2[2][COLS]={0,1,2,3,4,5,6,7,8,9};
+puts("\n\n");
+multiplyMatrix(matrix2,matrix,resultMatrix);
+printMatrix(resultMatrix);
+
+}
+
+
