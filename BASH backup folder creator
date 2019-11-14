@@ -1,0 +1,69 @@
+#!/bin/bash
+
+#christopher cui 260867703
+
+#check if number of arguments correct
+if [ ! $# -gt 3 ]
+then
+echo 'You have the incorrect number of arguments. The correct syntax is: ./backup SWITCH FILES DEST MESSAGE. Please try again.'
+exit 1
+fi
+#create variable for all the arguments in command line, to use for log purposes later
+messages=$*
+
+delete=false
+#check if -d is present. if it is then shift
+
+if [[ $1 = '-D' ]] || [[  $1 = '-d' ]]
+then
+
+        delete=true
+        shift
+fi
+
+#set the format for date
+backupname=backup$(date +'%Y-%m-%d')
+echo "Backup name is {$backupname}"
+datename=$(date +'%Y-%m-%d')
+
+
+destination=$2
+source=$1
+#check if the directory exists, if so then create it
+
+if [ ! -d $2 ]
+then
+mkdir -pv $2
+echo 'creating directory'
+fi
+cd $2
+#checks if the -d is present, if so then delete the source file
+#create teh tar archive
+if [  -d $1 ]  && [ $delete ]
+then
+cd $2
+tar -cvf $backupname.tar $1
+chmod u=rw $backupname.tar
+echo "creating backup archive"
+cd ../
+rmdir -f $1
+
+#create tar archive without deleting
+elif [ -d $1 ] && [ ! $delete ]
+then
+cd $2
+tar -cvf $backupname.tar $1
+chmod u=rw $backupname.tar
+echo "creating backup archive"
+fi
+
+#shift the argumetns so that the message is the only positional variables
+cd $2
+shift
+shift
+#create log and append the message and date to it
+touch backups.log
+y=`date`
+x=$*
+
+echo $y $x  >> backups.log
