@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+//Christopher Cui StudentID: 260867703
+int main(int argc, char *argv[]){
+if (argc != 3){
+	puts("Wrong number of arguments. Please input: ./reverse WORD1 WORD2.");
+	exit(1);
+
+}
+int origInd = 0;
+
+char *orig = argv[1];
+char *rev = argv[2];
+int revInd = strlen(rev) - 1;
+
+int origLength = strlen(orig);
+int revLength = strlen(rev);
+
+
+char origArr[origLength+1];
+char revArr[revLength+1];
+
+
+sprintf(origArr,"%s",orig);
+sprintf(revArr,"%s",rev);
+if (origLength != revLength){
+
+	printf("RD1=%s WORD2=%s â€“ NOT REVERSE",origArr,revArr);
+	exit(0);
+}
+for (int i =0;i<origLength+1;i++){
+
+	sprintf(origArr,"%s",orig);
+	if (origArr[origInd] != revArr[revInd]){
+	printf("WORD1=%s WORD2=%s â€“ NOT REVERSE \n",origArr,revArr);
+	exit(0);
+	
+}
+origInd++;
+revInd--;
+}
+	printf("WORD1=%s WORD2=%s â€“ REVERSE \n",origArr, revArr);
+
+
+	exit(0);
+	}
