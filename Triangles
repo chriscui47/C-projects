@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+//Christopher Cui StudentID: 260867703
+int size;
+int main(int argc, char *argv[]){
+
+//check if the correct amount of inputs is there. If so, then output an error and prompt the user for a size
+	if (argc <2) {
+		printf("Please enter a size");
+		scanf("%d", &size);
+		if (size<1){
+			printf("An incorrect triangle size was inputted. The size must be greater than 0 and an integer number. Syntax: ./triangles SIZE");
+		}
+	}
+//check if the input size is correct. if notm output an error 
+	else {    
+		 size=atoi(argv[1]);
+		printf("size is %d",size);
+		if (size<1){
+			printf("An incorrect triangle size was inputted. The size must be greater than 0 and an integer number. Syntax: ./triangles SIZE");
+		}
+		//3 forloops. One for the stars, one for the whitespaces, and one for the new line
+
+	}for (int i =0; i<size;i++){
+	printf("\n");
+	for (int x = size;x>=i;x--){
+	printf(" ");
+	}for (int x =0;x<=i;x++)
+	{printf("*");
+	}
+	}	
+
+	 		
+
+
+
+}
