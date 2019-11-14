@@ -103,6 +103,7 @@ void deleteRecord(FILE* p, int chooseID){
 			people[i].status=0;
 			printf("removing %s ID:%d",people[i].name,people[i].id);
 			nameMatch=1;
+      break;
 		}
 	}
 	if (!nameMatch){
